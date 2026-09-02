@@ -2,24 +2,43 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Services\SiteSettings;
+use App\Services\StatisticsService;
 use Illuminate\Database\Seeder;
 
+/**
+ * `php artisan migrate:fresh --seed` produces a complete, populated website:
+ * one administrator, fifteen supporters, nine campaigns with donation history,
+ * projects, events, stories, articles, gallery, team and messages.
+ */
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $this->call([
+            OrganizationSettingSeeder::class,
+            AdminSeeder::class,
+            UserSeeder::class,
+            CampaignSeeder::class,
+            ProjectSeeder::class,
+            EventSeeder::class,
+            SuccessStorySeeder::class,
+            PostSeeder::class,
+            AnnouncementSeeder::class,
+            TeamMemberSeeder::class,
+            GallerySeeder::class,
+            DonationSeeder::class,
+            VolunteerSeeder::class,
+            ContactMessageSeeder::class,
+            ActivityLogSeeder::class,
         ]);
+
+        app(SiteSettings::class)->flush();
+        app(StatisticsService::class)->flushPublicCache();
+
+        $this->command?->newLine();
+        $this->command?->info('KUET TRY sample data ready.');
+        $this->command?->line('  Admin      '.AdminSeeder::EMAIL.'  /  '.AdminSeeder::PASSWORD);
+        $this->command?->line('  Supporter  supporter@kuettry.org  /  '.UserSeeder::DEMO_PASSWORD);
     }
 }

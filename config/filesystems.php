@@ -30,14 +30,25 @@ return [
 
     'disks' => [
 
+        /*
+         * Private storage. `serve` is off: nothing in this application streams
+         * private files over HTTP, and leaving it on would register a
+         * signed-URL PUT endpoint at /storage/{path} that we never use — and
+         * which would shadow the public disk's URL prefix.
+         */
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app/private'),
-            'serve' => true,
+            'serve' => false,
             'throw' => false,
             'report' => false,
         ],
 
+        /*
+         * Uploaded images (campaigns, projects, gallery, avatars, branding).
+         * Reached through the public/storage symlink created by
+         * `php artisan storage:link`.
+         */
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
