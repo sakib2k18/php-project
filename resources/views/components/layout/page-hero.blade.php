@@ -4,12 +4,23 @@
     'description' => null,
     'breadcrumbs' => [],
     'tone' => 'brand',
+    'image' => null,
 ])
 
 <section {{ $attributes->merge(['class' => 'relative overflow-hidden '.($tone === 'light' ? 'border-b border-ink-100 bg-white' : 'bg-brand-950')]) }}>
     @if ($tone !== 'light')
+        @php
+            // Every dark hero carries the cover photo by default; a page can
+            // override it with its own image or pass false to opt out.
+            $heroImage = $image === false ? null : ($image ?: asset('images/cover.jpg'));
+        @endphp
         <div class="absolute inset-0" aria-hidden="true">
-            <div class="absolute inset-0 bg-[radial-gradient(120%_120%_at_20%_0%,#0f7d5a_0%,#0c4234_50%,#05261e_100%)]"></div>
+            @if ($heroImage)
+                <img src="{{ $heroImage }}" alt="" class="size-full object-cover">
+                {{-- The layered gradient keeps the headline readable over the photo. --}}
+                <div class="absolute inset-0 bg-[linear-gradient(100deg,#05261ef2_0%,#0c4234e0_45%,#05261e99_100%)]"></div>
+            @endif
+            <div class="absolute inset-0 bg-[radial-gradient(120%_120%_at_20%_0%,#0f7d5a_0%,#0c4234_50%,#05261e_100%)] {{ $heroImage ? 'opacity-60' : '' }}"></div>
             <div class="grain absolute inset-0 opacity-50"></div>
         </div>
     @endif
@@ -31,7 +42,7 @@
                     </p>
                 @endif
 
-                <h1 class="display mt-3 text-3xl {{ $tone === 'light' ? 'text-ink-900' : 'text-white' }} sm:text-4xl lg:text-[2.75rem]">
+                <h1 class="display text-shadow-hero mt-3 text-3xl {{ $tone === 'light' ? 'text-ink-900' : 'text-white' }} sm:text-4xl lg:text-[2.75rem]">
                     {{ $title }}
                 </h1>
 

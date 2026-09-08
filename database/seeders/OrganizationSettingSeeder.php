@@ -37,7 +37,8 @@ class OrganizationSettingSeeder extends Seeder
                 'value' => 'To stand beside families in crisis with practical, dignified and accountable help — reaching them quickly when disaster strikes and staying with them long enough to rebuild.'],
             ['key' => 'vision', 'label' => 'Vision', 'group' => 'identity', 'type' => 'text',
                 'value' => 'A Bangladesh where no family is left to face hunger, illness or disaster alone, and where young people see service to their community as a lifelong habit rather than a one-off act.'],
-            ['key' => 'logo', 'label' => 'Logo', 'group' => 'identity', 'type' => 'image', 'value' => null],
+            ['key' => 'logo', 'label' => 'Logo', 'group' => 'identity', 'type' => 'image',
+                'value' => '/images/logo.jpg'],
             ['key' => 'favicon', 'label' => 'Favicon', 'group' => 'identity', 'type' => 'image', 'value' => null],
 
             // ---- Contact --------------------------------------------------

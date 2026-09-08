@@ -9,12 +9,39 @@ class GallerySeeder extends Seeder
 {
     public function run(): void
     {
+        $images = $this->images();
+
         foreach ($this->items() as $index => $data) {
             GalleryItem::updateOrCreate(
                 ['title' => $data['title']],
-                $data + ['sort_order' => $index + 1, 'is_published' => true]
+                $data + ['image' => $images[$index] ?? null, 'sort_order' => $index + 1, 'is_published' => true]
             );
         }
+    }
+
+    /**
+     * Photographs bundled with the site (public/images/gallery), assigned to
+     * the gallery items in order. Items beyond the photograph count keep the
+     * designed placeholder.
+     *
+     * @return array<int, string>
+     */
+    protected function images(): array
+    {
+        return [
+            '/images/gallery/gallery-01.jpg',
+            '/images/gallery/gallery-02.jpg',
+            '/images/gallery/gallery-03.jpg',
+            '/images/gallery/gallery-04.jpg',
+            '/images/gallery/gallery-05.jpg',
+            '/images/gallery/gallery-06.jpg',
+            '/images/gallery/gallery-07.jpg',
+            '/images/gallery/gallery-08.jpg',
+            '/images/gallery/gallery-09.jpg',
+            '/images/gallery/gallery-10.jpg',
+            '/images/gallery/gallery-11.jpg',
+            '/images/gallery/gallery-12.jpg',
+        ];
     }
 
     /**

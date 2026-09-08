@@ -59,9 +59,13 @@
     {{-- Brand --}}
     <div class="flex h-16 shrink-0 items-center justify-between gap-2 border-b border-white/10 px-4">
         <a href="{{ route('admin.dashboard') }}" class="flex min-w-0 items-center gap-2.5">
-            <span class="grid size-9 shrink-0 place-items-center rounded-xl bg-brand-600 text-white">
-                <x-ui.icon name="hand-heart" class="size-5" />
-            </span>
+            @if ($site->imageUrl('logo'))
+                <img src="{{ $site->imageUrl('logo') }}" alt="" class="size-9 shrink-0 rounded-xl object-cover">
+            @else
+                <span class="grid size-9 shrink-0 place-items-center rounded-xl bg-brand-600 text-white">
+                    <x-ui.icon name="hand-heart" class="size-5" />
+                </span>
+            @endif
             <span class="min-w-0">
                 <span class="display block truncate text-base leading-none text-white">{{ $site->name() }}</span>
                 <span class="mt-0.5 block text-[9px] font-bold uppercase tracking-[0.14em] text-brand-400">Administration</span>

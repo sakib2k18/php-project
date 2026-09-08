@@ -122,6 +122,10 @@
         <div class="shell flex flex-col items-center justify-between gap-3 py-5 text-xs text-ink-500 sm:flex-row">
             <p>&copy; {{ $year }} {{ $site->name() }}. Built as a university project with the Laravel framework.</p>
             <p class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
+                <span class="inline-flex items-center gap-1.5" title="Khulna University of Engineering & Technology">
+                    <img src="{{ asset('images/kuet-logo.jpg') }}" alt="" class="size-4 rounded-sm object-contain">
+                    Based at KUET
+                </span>
                 <span>Weather by Open-Meteo</span>
                 <span>Maps &copy; OpenStreetMap contributors</span>
             </p>

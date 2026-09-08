@@ -15,9 +15,31 @@ class PostSeeder extends Seeder
         foreach ($this->posts() as $data) {
             Post::updateOrCreate(
                 ['slug' => $data['slug']],
-                $data + ['user_id' => $admin?->id]
+                $data + [
+                    'user_id' => $admin?->id,
+                    'cover_image' => $this->covers()[$data['slug']] ?? null,
+                ]
             );
         }
+    }
+
+    /**
+     * Cover photographs bundled with the site (public/images/posts),
+     * keyed by post slug.
+     *
+     * @return array<string, string>
+     */
+    protected function covers(): array
+    {
+        return [
+            'cyclone-response-what-your-donations-delivered-in-the-first-fortnight' => '/images/posts/post-01.jpg',
+            'why-we-publish-every-taka-we-spend' => '/images/posts/post-02.jpg',
+            'winter-distribution-reaches-1850-families-in-kurigram' => '/images/posts/post-03.jpg',
+            'medical-camp-at-phultala-462-patients-in-one-day' => '/images/posts/post-04.jpg',
+            'how-to-record-a-donation-on-the-new-website' => '/images/posts/post-05.jpg',
+            'meet-the-volunteers-behind-the-night-distributions' => '/images/posts/post-06.jpg',
+            'annual-report-2025-draft-in-preparation' => '/images/posts/post-07.jpg',
+        ];
     }
 
     /**

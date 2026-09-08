@@ -76,32 +76,47 @@
                 </div>
 
                 {{-- Values --}}
-                <div class="panel p-6 sm:p-7">
-                    <h2 class="display text-xl text-ink-900">What we hold ourselves to</h2>
+                <div>
+                    <div class="panel p-6 sm:p-7">
+                        <h2 class="display text-xl text-ink-900">What we hold ourselves to</h2>
 
-                    @php
-                        $values = [
-                            ['icon' => 'shield-check', 'title' => 'Verified before it counts',   'text' => 'A donation stays pending until it is matched against our bank or mobile banking statement. No total on this site is an estimate.'],
-                            ['icon' => 'document',     'title' => 'Published expenditure',       'text' => 'Every campaign ends in a field report listing what was bought, at what price, and for how many households.'],
-                            ['icon' => 'user-circle',  'title' => 'Dignity first',               'text' => 'We deliver to homes where we can, we take consent before photographing, and we do not publish a face to raise money.'],
-                            ['icon' => 'users',        'title' => 'Local verification',          'text' => 'Beneficiary lists are prepared with union parishad members and head teachers who actually know the households.'],
-                            ['icon' => 'refresh',      'title' => 'We publish what went wrong',  'text' => 'A report that only contains successes is advertising. Ours include the mistakes and what we changed.'],
-                        ];
-                    @endphp
+                        @php
+                            $values = [
+                                ['icon' => 'shield-check', 'title' => 'Verified before it counts',   'text' => 'A donation stays pending until it is matched against our bank or mobile banking statement. No total on this site is an estimate.'],
+                                ['icon' => 'document',     'title' => 'Published expenditure',       'text' => 'Every campaign ends in a field report listing what was bought, at what price, and for how many households.'],
+                                ['icon' => 'user-circle',  'title' => 'Dignity first',               'text' => 'We deliver to homes where we can, we take consent before photographing, and we do not publish a face to raise money.'],
+                                ['icon' => 'users',        'title' => 'Local verification',          'text' => 'Beneficiary lists are prepared with union parishad members and head teachers who actually know the households.'],
+                                ['icon' => 'refresh',      'title' => 'We publish what went wrong',  'text' => 'A report that only contains successes is advertising. Ours include the mistakes and what we changed.'],
+                            ];
+                        @endphp
 
-                    <ul class="mt-6 space-y-5">
-                        @foreach ($values as $value)
-                            <li class="flex gap-3.5">
-                                <span class="grid size-9 shrink-0 place-items-center rounded-lg bg-brand-50 text-brand-600">
-                                    <x-ui.icon :name="$value['icon']" class="size-4.5" />
-                                </span>
-                                <div>
-                                    <h3 class="text-sm font-bold text-ink-900">{{ $value['title'] }}</h3>
-                                    <p class="mt-1 text-xs leading-relaxed text-ink-600">{{ $value['text'] }}</p>
-                                </div>
-                            </li>
-                        @endforeach
-                    </ul>
+                        <ul class="mt-6 space-y-5">
+                            @foreach ($values as $value)
+                                <li class="flex gap-3.5">
+                                    <span class="grid size-9 shrink-0 place-items-center rounded-lg bg-brand-50 text-brand-600">
+                                        <x-ui.icon :name="$value['icon']" class="size-4.5" />
+                                    </span>
+                                    <div>
+                                        <h3 class="text-sm font-bold text-ink-900">{{ $value['title'] }}</h3>
+                                        <p class="mt-1 text-xs leading-relaxed text-ink-600">{{ $value['text'] }}</p>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+
+                    {{-- Home university --}}
+                    <div class="mt-6 flex items-center gap-4 rounded-xl border border-ink-100 bg-white p-4">
+                        <img src="{{ asset('images/kuet-logo.jpg') }}" alt="Khulna University of Engineering & Technology logo"
+                             class="size-14 shrink-0 rounded-lg object-contain">
+                        <div>
+                            <h3 class="text-sm font-bold text-ink-900">Based at KUET, Khulna</h3>
+                            <p class="mt-1 text-xs leading-relaxed text-ink-600">
+                                Founded by students, alumni and teachers of Khulna University of
+                                Engineering &amp; Technology — and still run from campus.
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

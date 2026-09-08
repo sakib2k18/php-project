@@ -27,7 +27,9 @@
         {{-- Brand panel — hidden on small screens where it would just push the form down --}}
         <aside class="relative hidden overflow-hidden bg-brand-950 lg:block">
             <div class="absolute inset-0" aria-hidden="true">
-                <div class="absolute inset-0 bg-[radial-gradient(120%_110%_at_25%_0%,#0f7d5a_0%,#0c4234_50%,#05261e_100%)]"></div>
+                <img src="{{ asset('images/cover.jpg') }}" alt="" class="size-full object-cover">
+                <div class="absolute inset-0 bg-[linear-gradient(120deg,#05261ef2_0%,#0c4234e0_55%,#05261ecc_100%)]"></div>
+                <div class="absolute inset-0 bg-[radial-gradient(120%_110%_at_25%_0%,#0f7d5a_0%,#0c4234_50%,#05261e_100%)] opacity-60"></div>
                 <div class="grain absolute inset-0 opacity-60"></div>
                 <div class="absolute -right-20 top-1/4 size-96 rounded-full bg-brand-500/15 blur-3xl"></div>
                 <div class="absolute -bottom-24 -left-16 size-80 rounded-full bg-accent-500/10 blur-3xl"></div>
@@ -92,9 +94,13 @@
             <div class="mx-auto w-full max-w-md">
                 {{-- Mobile brand --}}
                 <a href="{{ route('home') }}" class="mb-8 flex w-fit items-center gap-2.5 lg:hidden">
-                    <span class="grid size-10 place-items-center rounded-xl bg-brand-600 text-white">
-                        <x-ui.icon name="hand-heart" class="size-5.5" />
-                    </span>
+                    @if ($site->imageUrl('logo'))
+                        <img src="{{ $site->imageUrl('logo') }}" alt="" class="size-10 rounded-xl object-cover">
+                    @else
+                        <span class="grid size-10 place-items-center rounded-xl bg-brand-600 text-white">
+                            <x-ui.icon name="hand-heart" class="size-5.5" />
+                        </span>
+                    @endif
                     <span class="display text-lg text-ink-900">{{ $site->name() }}</span>
                 </a>
 

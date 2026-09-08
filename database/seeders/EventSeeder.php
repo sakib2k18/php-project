@@ -10,8 +10,31 @@ class EventSeeder extends Seeder
     public function run(): void
     {
         foreach ($this->events() as $data) {
-            Event::updateOrCreate(['slug' => $data['slug']], $data);
+            Event::updateOrCreate(
+                ['slug' => $data['slug']],
+                $data + ['image' => $this->images()[$data['slug']] ?? null]
+            );
         }
+    }
+
+    /**
+     * Photographs bundled with the site, keyed by event slug. They are drawn
+     * from the gallery set — field photos from the same activity days.
+     *
+     * @return array<string, string>
+     */
+    protected function images(): array
+    {
+        return [
+            'volunteer-orientation-and-field-safety-briefing' => '/images/gallery/gallery-01.jpg',
+            'free-medical-camp-phultala' => '/images/gallery/gallery-02.jpg',
+            'winter-blanket-packing-day' => '/images/gallery/gallery-03.jpg',
+            'annual-fundraising-iftar' => '/images/gallery/gallery-04.jpg',
+            'blood-donation-drive' => '/images/gallery/gallery-05.jpg',
+            'eid-package-distribution-day' => '/images/gallery/gallery-06.jpg',
+            'disaster-preparedness-workshop' => '/images/gallery/gallery-07.jpg',
+            'alumni-networking-evening' => '/images/gallery/gallery-08.jpg',
+        ];
     }
 
     /**

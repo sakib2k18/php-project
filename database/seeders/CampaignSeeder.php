@@ -19,7 +19,10 @@ class CampaignSeeder extends Seeder
 
             $campaign = Campaign::updateOrCreate(
                 ['slug' => $data['slug']],
-                $data + ['created_by' => $admin?->id]
+                $data + [
+                    'created_by' => $admin?->id,
+                    'cover_image' => $this->covers()[$data['slug']] ?? null,
+                ]
             );
 
             foreach ($updates as $index => $update) {
@@ -33,6 +36,27 @@ class CampaignSeeder extends Seeder
                 );
             }
         }
+    }
+
+    /**
+     * Cover photographs bundled with the site (public/images/campaigns),
+     * keyed by campaign slug.
+     *
+     * @return array<string, string>
+     */
+    protected function covers(): array
+    {
+        return [
+            'cyclone-response-fund-coastal-khulna' => '/images/campaigns/campaign-01.jpg',
+            'winter-warmth-2026-blankets-for-the-north' => '/images/campaigns/campaign-02.jpg',
+            'school-bags-and-books-for-500-children' => '/images/campaigns/campaign-03.jpg',
+            'emergency-surgery-fund' => '/images/campaigns/campaign-04.jpg',
+            'monthly-food-parcels-for-200-families' => '/images/campaigns/campaign-05.jpg',
+            'safe-water-for-sundarban-villages' => '/images/campaigns/campaign-06.jpg',
+            'flood-relief-sylhet-and-sunamganj' => '/images/campaigns/campaign-07.jpg',
+            'orphan-education-sponsorship' => '/images/campaigns/campaign-08.jpg',
+            'skills-training-for-young-women' => '/images/campaigns/campaign-09.jpg',
+        ];
     }
 
     /**

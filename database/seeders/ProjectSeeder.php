@@ -10,8 +10,31 @@ class ProjectSeeder extends Seeder
     public function run(): void
     {
         foreach ($this->projects() as $data) {
-            Project::updateOrCreate(['slug' => $data['slug']], $data);
+            Project::updateOrCreate(
+                ['slug' => $data['slug']],
+                $data + ['image' => $this->images()[$data['slug']] ?? null]
+            );
         }
+    }
+
+    /**
+     * Cover photographs bundled with the site (public/images/projects),
+     * keyed by project slug.
+     *
+     * @return array<string, string>
+     */
+    protected function images(): array
+    {
+        return [
+            'winter-clothes-distribution-2025' => '/images/projects/project-01.jpg',
+            'flood-relief-programme-haor-basin' => '/images/projects/project-02.jpg',
+            'educational-support-programme' => '/images/projects/project-03.jpg',
+            'monthly-food-distribution' => '/images/projects/project-04.jpg',
+            'free-medical-camp-series' => '/images/projects/project-05.jpg',
+            'safe-drinking-water-initiative' => '/images/projects/project-06.jpg',
+            'eid-food-package-distribution' => '/images/projects/project-07.jpg',
+            'tree-plantation-and-embankment-greening' => '/images/projects/project-08.jpg',
+        ];
     }
 
     /**

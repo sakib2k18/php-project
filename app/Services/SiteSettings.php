@@ -65,6 +65,13 @@ class SiteSettings
             return null;
         }
 
+        // Bundled theme images live in public/images and are stored as
+        // docroot-relative paths ("/images/..."); uploads resolve through
+        // the public disk as usual.
+        if (str_starts_with($path, '/') || str_contains($path, '://')) {
+            return $path;
+        }
+
         return Storage::disk(config('site.uploads.disk'))->url($path);
     }
 

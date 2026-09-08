@@ -17,9 +17,28 @@ class SuccessStorySeeder extends Seeder
             unset($data['campaign_slug']);
 
             $data['campaign_id'] = $campaignSlug ? ($campaigns[$campaignSlug] ?? null) : null;
+            $data['image'] = $this->images()[$data['slug']] ?? null;
 
             SuccessStory::updateOrCreate(['slug' => $data['slug']], $data);
         }
+    }
+
+    /**
+     * Photographs bundled with the site (public/images/stories),
+     * keyed by story slug.
+     *
+     * @return array<string, string>
+     */
+    protected function images(): array
+    {
+        return [
+            'rehana-rebuilt-her-home-and-her-tailoring-business' => '/images/stories/story-01.jpg',
+            'sabbir-sat-his-exams-after-all' => '/images/stories/story-02.jpg',
+            'a-surgery-that-could-not-wait' => '/images/stories/story-03.jpg',
+            'clean-water-four-kilometres-closer' => '/images/stories/story-04.jpg',
+            'two-hundred-kitchens-every-month' => '/images/stories/story-05.jpg',
+            'a-blanket-on-the-coldest-night-of-the-year' => '/images/stories/story-06.jpg',
+        ];
     }
 
     /**
