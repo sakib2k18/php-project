@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Models\Announcement;
 use App\Models\Event;
 use App\Models\GalleryItem;
-use App\Models\Post;
 use App\Models\Project;
 use App\Models\SuccessStory;
 use App\Models\TeamMember;
@@ -115,40 +114,6 @@ class ContentManagementTest extends TestCase
             'end_time' => '09:00',
             'status' => Event::STATUS_PUBLISHED,
         ])->assertSessionHasErrors('end_time');
-    }
-
-    // ---------------- Posts ----------------
-
-    public function test_an_administrator_can_manage_articles(): void
-    {
-        $payload = [
-            'title' => 'Winter Distribution Field Report',
-            'excerpt' => 'Eleven nights, 62 volunteers and 1,850 blankets across eight unions of the north.',
-            'content' => str_repeat('<p>Detailed reporting of the distribution and its costs.</p>', 4),
-            'category' => 'field_report',
-            'author' => 'Logistics Team',
-            'status' => Post::STATUS_PUBLISHED,
-        ];
-
-        $this->actingAs($this->admin)->post('/admin/posts', $payload)->assertRedirect();
-
-        $post = Post::query()->firstOrFail();
-
-        // A published article is stamped with a publish date automatically.
-        $this->assertNotNull($post->published_at);
-        $this->get('/news')->assertOk()->assertSee('Winter Distribution Field Report');
-
-        $this->actingAs($this->admin)->delete("/admin/posts/{$post->slug}");
-        $this->assertSoftDeleted('posts', ['id' => $post->id]);
-    }
-
-    public function test_a_draft_article_is_hidden_from_the_public_site(): void
-    {
-        $draft = Post::factory()->draft()->create(['title' => 'Unpublished Draft Omega']);
-
-        $this->get('/news')->assertOk()->assertDontSee('Unpublished Draft Omega');
-        $this->get("/news/{$draft->slug}")->assertNotFound();
-        $this->actingAs($this->admin)->get("/news/{$draft->slug}")->assertOk();
     }
 
     // ---------------- Success stories ----------------

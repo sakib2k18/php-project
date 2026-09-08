@@ -15,7 +15,6 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PageController;
-use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SearchController;
@@ -50,9 +49,6 @@ Route::get('/events/{event}', [EventController::class, 'show'])->name('events.sh
 
 Route::get('/stories', [SuccessStoryController::class, 'index'])->name('stories.index');
 Route::get('/stories/{story}', [SuccessStoryController::class, 'show'])->name('stories.show');
-
-Route::get('/news', [PostController::class, 'index'])->name('news.index');
-Route::get('/news/{post}', [PostController::class, 'show'])->name('news.show');
 
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery.index');
 
@@ -170,10 +166,6 @@ Route::middleware(['auth', 'admin'])
             ->parameters(['stories' => 'story'])
             ->except(['show']);
         Route::post('stories/{id}/restore', [Admin\SuccessStoryController::class, 'restore'])->name('stories.restore');
-
-        // News / blog
-        Route::resource('posts', Admin\PostController::class)->except(['show']);
-        Route::post('posts/{id}/restore', [Admin\PostController::class, 'restore'])->name('posts.restore');
 
         // Announcements
         Route::resource('announcements', Admin\AnnouncementController::class)->except(['show']);

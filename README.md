@@ -69,16 +69,15 @@ university project and a more honest model for a small organisation.
 
 ### Public website
 - **Homepage** — hero, live impact statistics, emergency appeal spotlight, announcements, featured
-  campaigns, our work, impact stories, upcoming events, latest news, weather, map and gallery strip.
+  campaigns, our work, impact stories, upcoming events, weather, map and gallery strip.
 - **Campaigns** — searchable and filterable index (category, status, four sort orders) with a detail
   page showing progress, field updates, recent supporters, related campaigns and a location map.
 - **Projects** — completed and ongoing work, filterable, with detail pages.
 - **Events** — upcoming and past, with times, locations and maps.
 - **Impact stories** — featured story, search, detail pages linked back to the funding campaign.
-- **News / blog** — featured lead article, categories, search, sidebar, article pages.
 - **Gallery** — category-filtered grid with a keyboard-accessible lightbox.
 - **About / Team / Get Involved / Contact** pages.
-- **Site-wide search** across campaigns, projects, stories and news.
+- **Site-wide search** across campaigns, projects and stories.
 - `sitemap.xml` and `robots.txt`.
 
 ### Supporter area
@@ -91,7 +90,7 @@ university project and a more honest model for a small organisation.
 
 ### Administration panel (`/admin`)
 - Dashboard with eight live statistic cards, four Chart.js charts, work queues and an activity feed.
-- Full CRUD for campaigns (plus field updates), projects, events, success stories, news articles,
+- Full CRUD for campaigns (plus field updates), projects, events, success stories,
   announcements, gallery images and team members.
 - Donation verification (approve / reject / reopen), donation reports with date filtering, and a
   "recalculate campaign totals" repair action.
@@ -248,7 +247,6 @@ comes into existence, and the seeder demotes any other admin it finds so exactly
 | Projects | `/projects`, `/projects/{slug}` |
 | Events | `/events`, `/events/{slug}` |
 | Impact stories | `/stories`, `/stories/{slug}` |
-| News | `/news`, `/news/{slug}` |
 | Gallery | `/gallery` |
 | Get involved | `/get-involved` |
 | Contact | `/contact` |
@@ -287,7 +285,6 @@ comes into existence, and the seeder demotes any other admin it finds so exactly
 | `events` | Orientations, camps, fundraisers, soft deletes |
 | `volunteers` | Volunteer applications (one per user) |
 | `success_stories` | Beneficiary stories, soft deletes |
-| `posts` | News / blog articles, soft deletes |
 | `announcements` | Homepage notices with priority and expiry |
 | `gallery_items` | Gallery photographs |
 | `team_members` | Public team page |
@@ -301,7 +298,7 @@ comes into existence, and the seeder demotes any other admin it finds so exactly
 ```
 User      hasMany   Donation          Donation  belongsTo User, Campaign, reviewer(User)
 User      hasOne    Volunteer         Campaign  hasMany   Donation, CampaignUpdate, SuccessStory
-User      hasMany   Post, ActivityLog SuccessStory belongsTo Campaign
+User      hasMany   ActivityLog       SuccessStory belongsTo Campaign
 ```
 
 Foreign keys use `nullOnDelete()` for donations (so financial history survives account deletion) and
@@ -361,7 +358,7 @@ resources/
 └── views/
     ├── layouts/              app, admin, dashboard, auth
     ├── components/           ui.*, form.*, layout.*, admin.*, cards, pagination
-    ├── pages/ campaigns/ projects/ events/ stories/ news/ gallery/
+    ├── pages/ campaigns/ projects/ events/ stories/ gallery/
     ├── auth/ dashboard/ admin/ errors/
 ```
 
@@ -422,7 +419,7 @@ mysql -h 127.0.0.1 -P 4306 -u root -e "CREATE DATABASE kuet_try_test CHARACTER S
 | `AdminAuthorizationTest` | Guests and users blocked from all 17 admin areas; single-admin protection |
 | `DonationTest` | Recording, validation, approval, rejection, double-count guard, totals, privacy, receipts |
 | `CampaignManagementTest` | Full CRUD, soft delete/restore, slugs, filters, upload validation |
-| `ContentManagementTest` | CRUD for projects, events, posts, stories, announcements, gallery, team |
+| `ContentManagementTest` | CRUD for projects, events, stories, announcements, gallery, team |
 | `VolunteerTest` | Applications, one-per-user, editing rules, admin review, notifications |
 | `ContactAndApiTest` | Contact form, honeypot, message privacy, weather transform/cache/failure |
 | `ProfileTest` | Profile updates, self-promotion guard, avatar, password change, account closure |

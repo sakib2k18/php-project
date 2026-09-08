@@ -400,7 +400,7 @@
     /* ---- Navigation ------------------------------------------------------ */
 
     /*
-     * Ten primary links have to fit beside the brand and the account controls
+     * Nine primary links have to fit beside the brand and the account controls
      * at exactly 1280px (Tailwind's xl, where the desktop nav appears), so the
      * horizontal padding is tight there and relaxes on wider screens.
      */
@@ -408,7 +408,7 @@
         position: relative;
         padding: 0.5rem 0.5rem;
         border-radius: 0.5rem;
-        font-size: 0.8125rem;
+        font-size: 0.875rem;
         font-weight: 550;
         white-space: nowrap;
         color: var(--color-ink-600);
@@ -416,7 +416,7 @@
     }
 
     @media (min-width: 1536px) {
-        .nav-link { padding-inline: 0.75rem; font-size: 0.875rem; }
+        .nav-link { padding-inline: 0.75rem; font-size: 0.9375rem; }
     }
 
     .nav-link:hover { color: var(--color-brand-700); background-color: var(--color-brand-50); }

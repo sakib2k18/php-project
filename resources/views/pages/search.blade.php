@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('title', ($term ? "Search: {$term}" : 'Search').' — '.$site->name())
-@section('description', 'Search campaigns, projects, stories and news across the KUET TRY website.')
+@section('description', 'Search campaigns, projects and stories across the KUET TRY website.')
 
 @section('content')
 
     <x-layout.page-hero
         eyebrow="Find something"
         title="Search"
-        :description="$term ? null : 'Search across campaigns, projects, impact stories and news articles.'"
+        :description="$term ? null : 'Search across campaigns, projects and impact stories.'"
         :breadcrumbs="['Search' => null]"
     />
 
@@ -22,7 +22,7 @@
                             <x-ui.icon name="search" class="size-5" />
                         </span>
                         <input type="search" id="q" name="q" value="{{ $term }}" autofocus
-                               placeholder="Campaigns, projects, stories, news…" class="field pl-11 text-base">
+                               placeholder="Campaigns, projects, stories…" class="field pl-11 text-base">
                     </div>
                     <button type="submit" class="btn btn-primary btn-lg">Search</button>
                 </div>
@@ -44,7 +44,6 @@
                         <a href="{{ route('campaigns.index') }}" class="btn btn-outline btn-sm">Campaigns</a>
                         <a href="{{ route('projects.index') }}" class="btn btn-outline btn-sm">Projects</a>
                         <a href="{{ route('stories.index') }}" class="btn btn-outline btn-sm">Stories</a>
-                        <a href="{{ route('news.index') }}" class="btn btn-outline btn-sm">News</a>
                     </x-ui.empty-state>
                 @endif
 
@@ -89,28 +88,13 @@
                         </div>
                     </div>
                 @endif
-
-                @if ($results['posts']->isNotEmpty())
-                    <div class="mt-12">
-                        <div class="flex items-center gap-3">
-                            <h2 class="display text-xl text-ink-900">News &amp; reports</h2>
-                            <x-ui.badge tone="brand">{{ $results['posts']->count() }}</x-ui.badge>
-                        </div>
-                        <div class="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                            @foreach ($results['posts'] as $post)
-                                <x-post-card :post="$post" />
-                            @endforeach
-                        </div>
-                    </div>
-                @endif
             @else
-                <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     @php
                         $shortcuts = [
                             ['icon' => 'heart',     'label' => 'Campaigns', 'url' => route('campaigns.index')],
                             ['icon' => 'briefcase', 'label' => 'Projects',  'url' => route('projects.index')],
                             ['icon' => 'sparkles',  'label' => 'Stories',   'url' => route('stories.index')],
-                            ['icon' => 'newspaper', 'label' => 'News',      'url' => route('news.index')],
                         ];
                     @endphp
 

@@ -54,9 +54,9 @@
                             <x-ui.empty-state
                                 icon="calendar"
                                 title="Nothing scheduled right now"
-                                description="Our next orientation, camp or distribution day will be announced here and on our news page."
+                                description="Our next orientation, camp or distribution day will be announced here and on our stories page."
                             >
-                                <a href="{{ route('news.index') }}" class="btn btn-outline btn-sm">Read the latest news</a>
+                                <a href="{{ route('stories.index') }}" class="btn btn-outline btn-sm">Read the latest stories</a>
                             </x-ui.empty-state>
                         </div>
                     @endforelse

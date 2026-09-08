@@ -7,7 +7,6 @@ use App\Models\Campaign;
 use App\Models\Donation;
 use App\Models\Event;
 use App\Models\GalleryItem;
-use App\Models\Post;
 use App\Models\Project;
 use App\Models\SuccessStory;
 use App\Models\TeamMember;
@@ -41,7 +40,6 @@ class AppServiceProvider extends ServiceProvider
         Project::class,
         Event::class,
         SuccessStory::class,
-        Post::class,
         Announcement::class,
         GalleryItem::class,
         TeamMember::class,

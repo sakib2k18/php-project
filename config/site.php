@@ -128,13 +128,6 @@ return [
         'team' => 'Our Team',
     ],
 
-    'post_categories' => [
-        'news' => 'News',
-        'field_report' => 'Field Report',
-        'announcement' => 'Announcement',
-        'story' => 'Story',
-    ],
-
     'volunteer_availability' => [
         'weekdays' => 'Weekdays',
         'weekends' => 'Weekends',
@@ -159,6 +152,5 @@ return [
     'pagination' => [
         'public' => 9,
         'admin' => 10,
-        'news' => 10,
     ],
 ];

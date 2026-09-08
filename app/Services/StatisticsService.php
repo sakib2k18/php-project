@@ -7,7 +7,6 @@ use App\Models\ContactMessage;
 use App\Models\Donation;
 use App\Models\Event;
 use App\Models\GalleryItem;
-use App\Models\Post;
 use App\Models\Project;
 use App\Models\SuccessStory;
 use App\Models\User;
@@ -93,9 +92,6 @@ class StatisticsService
 
             'events_upcoming' => Event::query()->published()->upcoming()->count(),
             'events_total' => Event::query()->count(),
-
-            'posts_published' => Post::query()->published()->count(),
-            'posts_draft' => Post::query()->where('status', Post::STATUS_DRAFT)->count(),
 
             'projects_total' => Project::query()->count(),
             'stories_total' => SuccessStory::query()->count(),

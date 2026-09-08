@@ -21,8 +21,7 @@ class GallerySeeder extends Seeder
 
     /**
      * Photographs bundled with the site (public/images/gallery), assigned to
-     * the gallery items in order. Items beyond the photograph count keep the
-     * designed placeholder.
+     * the gallery items in order.
      *
      * @return array<int, string>
      */
@@ -41,6 +40,13 @@ class GallerySeeder extends Seeder
             '/images/gallery/gallery-10.jpg',
             '/images/gallery/gallery-11.jpg',
             '/images/gallery/gallery-12.jpg',
+            '/images/gallery/gallery-13.jpg',
+            '/images/gallery/gallery-14.jpg',
+            '/images/gallery/gallery-15.jpg',
+            '/images/gallery/gallery-16.jpg',
+            '/images/gallery/gallery-17.jpg',
+            '/images/gallery/gallery-18.jpg',
+            '/images/gallery/gallery-19.jpg',
         ];
     }
 
@@ -66,6 +72,9 @@ class GallerySeeder extends Seeder
             ['title' => 'Monthly food parcel packing', 'caption' => 'Two hundred parcels assembled on the first Friday of the month.', 'category' => 'community', 'taken_on' => now()->subMonths(1)->toDateString()],
             ['title' => 'The executive committee', 'caption' => 'Planning meeting ahead of the winter season.', 'category' => 'team', 'taken_on' => now()->subMonths(2)->toDateString()],
             ['title' => 'Field operations team, Koyra', 'caption' => 'The response team on the embankment road after the second delivery run.', 'category' => 'team', 'taken_on' => now()->subDays(16)->toDateString()],
+            ['title' => 'On the road to the flood shelter', 'caption' => 'The relief convoy crossing the ferry ghat before dawn.', 'category' => 'relief', 'taken_on' => now()->subDays(21)->toDateString()],
+            ['title' => 'Handover moment, Satkhira', 'caption' => 'A month of dry rations delivered to a beneficiary household.', 'category' => 'relief', 'taken_on' => now()->subDays(9)->toDateString()],
+            ['title' => 'Volunteers between shifts', 'caption' => 'The afternoon crew taking a break on distribution day.', 'category' => 'events', 'taken_on' => now()->subDays(13)->toDateString()],
         ];
     }
 }

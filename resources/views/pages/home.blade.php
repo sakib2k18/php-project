@@ -16,8 +16,8 @@
             <div class="absolute -bottom-32 -left-24 size-[26rem] rounded-full bg-accent-500/10 blur-3xl"></div>
         </div>
 
-        <div class="shell relative py-16 sm:py-20 lg:py-28">
-            <div class="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
+        <div class="shell relative py-14 sm:py-16 lg:py-20">
+            <div class="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
                 <div>
                     <p class="eyebrow !text-accent-300">
                         <span class="inline-block h-px w-7 bg-accent-400"></span>
@@ -56,6 +56,12 @@
                         <li class="flex items-center gap-1.5">
                             <x-ui.icon name="users" class="size-4 text-brand-300" />
                             Student &amp; alumni volunteers
+                        </li>
+                        {{-- TRY is a student organisation of KUET, so the university
+                             mark sits beside the other trust markers. --}}
+                        <li class="flex items-center gap-1.5">
+                            <img src="{{ asset('images/kuet-logo.jpg') }}" alt="" class="size-4 rounded-sm object-contain">
+                            Run by KUET students
                         </li>
                     </ul>
                 </div>
@@ -227,9 +233,9 @@
                     class="mt-10"
                     icon="sparkles"
                     title="No campaigns are open right now"
-                    description="New appeals are published as soon as a need is verified. Follow our news page to hear first."
+                    description="New appeals are published as soon as a need is verified. Follow our stories page to hear first."
                 >
-                    <a href="{{ route('news.index') }}" class="btn btn-outline btn-sm">Read the latest news</a>
+                    <a href="{{ route('stories.index') }}" class="btn btn-outline btn-sm">Read the latest stories</a>
                 </x-ui.empty-state>
             @endif
         </div>
@@ -323,68 +329,35 @@
     @endif
 
     {{-- ================================================================
-         EVENTS + NEWS
+         UPCOMING EVENTS
          ================================================================ --}}
     <section class="section bg-white">
         <div class="shell">
-            <div class="grid gap-12 lg:grid-cols-2">
-                {{-- Upcoming events --}}
-                <div>
-                    <div class="flex items-end justify-between gap-4">
-                        <x-ui.section-heading eyebrow="Diary" title="Upcoming events" level="h2" />
-                        <a href="{{ route('events.index') }}" class="link-arrow shrink-0">
-                            All events <x-ui.icon name="arrow-right" class="size-4" />
-                        </a>
-                    </div>
-
-                    <div class="mt-7 space-y-4">
-                        @forelse ($events as $event)
-                            <x-event-card :event="$event" class="reveal" />
-                        @empty
-                            <x-ui.empty-state
-                                icon="calendar"
-                                title="No events scheduled"
-                                description="Our next orientation, camp or distribution day will be announced here."
-                            />
-                        @endforelse
-                    </div>
-                </div>
-
-                {{-- Latest news --}}
-                <div>
-                    <div class="flex items-end justify-between gap-4">
-                        <x-ui.section-heading eyebrow="From the field" title="Latest news" level="h2" />
-                        <a href="{{ route('news.index') }}" class="link-arrow shrink-0">
-                            All articles <x-ui.icon name="arrow-right" class="size-4" />
-                        </a>
-                    </div>
-
-                    <div class="mt-7 space-y-4">
-                        @forelse ($posts as $post)
-                            <article class="reveal card card-hover group flex gap-4 p-4">
-                                <a href="{{ route('news.show', $post) }}" class="w-24 shrink-0 sm:w-28" tabindex="-1" aria-hidden="true">
-                                    <x-ui.media :src="$post->image_url" :alt="$post->title" :seed="$post->slug"
-                                                icon="newspaper" ratio="aspect-square" rounded="rounded-lg" />
-                                </a>
-
-                                <div class="min-w-0 flex-1">
-                                    <p class="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-ink-500">
-                                        <x-ui.badge tone="brand">{{ $post->category_label }}</x-ui.badge>
-                                        <span>{{ $post->published_at?->format('j M Y') }}</span>
-                                    </p>
-                                    <h3 class="mt-1.5 line-clamp-2 text-sm font-bold leading-snug text-ink-900">
-                                        <a href="{{ route('news.show', $post) }}" class="transition hover:text-brand-700">{{ $post->title }}</a>
-                                    </h3>
-                                    <p class="mt-1 line-clamp-2 text-xs leading-relaxed text-ink-600">{{ $post->excerpt }}</p>
-                                </div>
-                            </article>
-                        @empty
-                            <x-ui.empty-state icon="newspaper" title="No articles yet"
-                                              description="Field reports and organisation news will appear here." />
-                        @endforelse
-                    </div>
-                </div>
+            <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                <x-ui.section-heading
+                    eyebrow="Diary"
+                    title="Upcoming events"
+                    description="Orientations, medical camps and distribution days our volunteers are preparing for."
+                />
+                <a href="{{ route('events.index') }}" class="btn btn-outline shrink-0">
+                    All events <x-ui.icon name="arrow-right" class="size-4" />
+                </a>
             </div>
+
+            @if ($events->isNotEmpty())
+                <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                    @foreach ($events as $event)
+                        <x-event-card :event="$event" class="reveal" />
+                    @endforeach
+                </div>
+            @else
+                <x-ui.empty-state
+                    class="mt-10"
+                    icon="calendar"
+                    title="No events scheduled"
+                    description="Our next orientation, camp or distribution day will be announced here."
+                />
+            @endif
         </div>
     </section>
 

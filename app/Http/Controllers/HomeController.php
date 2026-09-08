@@ -6,7 +6,6 @@ use App\Models\Announcement;
 use App\Models\Campaign;
 use App\Models\Event;
 use App\Models\GalleryItem;
-use App\Models\Post;
 use App\Models\Project;
 use App\Models\SuccessStory;
 use App\Services\StatisticsService;
@@ -66,12 +65,6 @@ class HomeController extends Controller
                 ->limit(3)
                 ->get(),
 
-            'posts' => Post::query()
-                ->published()
-                ->orderByDesc('published_at')
-                ->limit(3)
-                ->get(),
-
             'gallery' => GalleryItem::query()
                 ->published()
                 ->orderBy('sort_order')
@@ -92,7 +85,6 @@ class HomeController extends Controller
             'projects' => Project::query()->published()->latest('updated_at')->get(['slug', 'updated_at']),
             'events' => Event::query()->published()->latest('updated_at')->get(['slug', 'updated_at']),
             'stories' => SuccessStory::query()->published()->latest('updated_at')->get(['slug', 'updated_at']),
-            'posts' => Post::query()->published()->latest('updated_at')->get(['slug', 'updated_at']),
         ])->render();
 
         return response($content, 200)->header('Content-Type', 'application/xml');

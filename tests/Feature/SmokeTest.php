@@ -8,7 +8,6 @@ use App\Models\ContactMessage;
 use App\Models\Donation;
 use App\Models\Event;
 use App\Models\GalleryItem;
-use App\Models\Post;
 use App\Models\Project;
 use App\Models\SuccessStory;
 use App\Models\TeamMember;
@@ -39,7 +38,6 @@ class SmokeTest extends TestCase
         $project = Project::query()->published()->firstOrFail();
         $event = Event::query()->published()->firstOrFail();
         $story = SuccessStory::query()->published()->firstOrFail();
-        $post = Post::query()->published()->firstOrFail();
 
         $urls = [
             '/',
@@ -58,9 +56,6 @@ class SmokeTest extends TestCase
             "/events/{$event->slug}",
             '/stories',
             "/stories/{$story->slug}",
-            '/news',
-            '/news?category=field_report',
-            "/news/{$post->slug}",
             '/gallery',
             '/gallery?category=relief',
             '/contact',
@@ -107,7 +102,6 @@ class SmokeTest extends TestCase
         $project = Project::query()->firstOrFail();
         $event = Event::query()->firstOrFail();
         $story = SuccessStory::query()->firstOrFail();
-        $post = Post::query()->firstOrFail();
         $announcement = Announcement::query()->firstOrFail();
         $gallery = GalleryItem::query()->firstOrFail();
         $member = TeamMember::query()->firstOrFail();
@@ -141,10 +135,6 @@ class SmokeTest extends TestCase
             '/admin/stories',
             '/admin/stories/create',
             "/admin/stories/{$story->slug}/edit",
-
-            '/admin/posts',
-            '/admin/posts/create',
-            "/admin/posts/{$post->slug}/edit",
 
             '/admin/announcements',
             '/admin/announcements/create',

@@ -6,7 +6,7 @@ use App\Models\User;
 
 /**
  * Shared authorisation for every editorial resource (campaigns, projects,
- * events, stories, posts, announcements, gallery, team members).
+ * events, stories, announcements, gallery, team members).
  *
  * Content is authored by the organisation, so the rule is simply: the
  * administrator manages it, everyone else reads the published version.

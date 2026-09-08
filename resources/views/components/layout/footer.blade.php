@@ -82,7 +82,6 @@
                     <li><a href="{{ route('donations.create') }}" class="transition hover:text-brand-300">Make a donation</a></li>
                     <li><a href="{{ route('volunteer.index') }}" class="transition hover:text-brand-300">Volunteer with us</a></li>
                     <li><a href="{{ route('stories.index') }}" class="transition hover:text-brand-300">Impact stories</a></li>
-                    <li><a href="{{ route('news.index') }}" class="transition hover:text-brand-300">News &amp; reports</a></li>
                     <li><a href="{{ route('gallery.index') }}" class="transition hover:text-brand-300">Gallery</a></li>
                 </ul>
             </div>

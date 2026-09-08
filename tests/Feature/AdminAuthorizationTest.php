@@ -31,7 +31,6 @@ class AdminAuthorizationTest extends TestCase
             '/admin/projects',
             '/admin/events',
             '/admin/stories',
-            '/admin/posts',
             '/admin/announcements',
             '/admin/gallery',
             '/admin/team',

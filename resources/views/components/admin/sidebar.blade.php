@@ -17,7 +17,6 @@
                 ['label' => 'Projects',        'icon' => 'briefcase', 'route' => 'admin.projects.index',      'patterns' => ['admin.projects.*']],
                 ['label' => 'Events',          'icon' => 'calendar',  'route' => 'admin.events.index',        'patterns' => ['admin.events.*']],
                 ['label' => 'Success stories', 'icon' => 'sparkles',  'route' => 'admin.stories.index',       'patterns' => ['admin.stories.*']],
-                ['label' => 'News / Blog',     'icon' => 'newspaper', 'route' => 'admin.posts.index',         'patterns' => ['admin.posts.*']],
                 ['label' => 'Announcements',   'icon' => 'megaphone', 'route' => 'admin.announcements.index', 'patterns' => ['admin.announcements.*']],
                 ['label' => 'Gallery',         'icon' => 'photo',     'route' => 'admin.gallery.index',       'patterns' => ['admin.gallery.*']],
                 ['label' => 'Team members',    'icon' => 'users',     'route' => 'admin.team.index',          'patterns' => ['admin.team.*']],

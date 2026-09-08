@@ -85,11 +85,6 @@ class User extends Authenticatable
         return $this->hasMany(ActivityLog::class);
     }
 
-    public function posts(): HasMany
-    {
-        return $this->hasMany(Post::class);
-    }
-
     // -----------------------------------------------------------------
     // Role helpers
     // -----------------------------------------------------------------

@@ -7,7 +7,6 @@
         ['label' => 'Events',      'route' => 'events.index',    'patterns' => ['events.*']],
         ['label' => 'Get Involved','route' => 'get-involved',    'patterns' => ['get-involved', 'volunteer.*']],
         ['label' => 'Stories',     'route' => 'stories.index',   'patterns' => ['stories.*']],
-        ['label' => 'News',        'route' => 'news.index',      'patterns' => ['news.*']],
         ['label' => 'Gallery',     'route' => 'gallery.index',   'patterns' => ['gallery.*']],
         ['label' => 'Contact',     'route' => 'contact.create',  'patterns' => ['contact.*']],
     ];
@@ -54,11 +53,20 @@
 
                 <span class="min-w-0">
                     <span class="display block text-lg leading-none text-ink-900">{{ $site->name() }}</span>
-                    {{-- Hidden between xl and 2xl, where the ten nav links need the room. --}}
+                    {{-- Hidden between xl and 2xl, where the nav links need the room. --}}
                     <span class="mt-0.5 hidden text-[10px] font-semibold uppercase tracking-[0.13em] text-brand-600 sm:block xl:hidden 2xl:block">
                         Humanitarian Organization
                     </span>
                 </span>
+
+                {{-- TRY is a student organisation of KUET — the university mark
+                     travels beside the brand. Hidden on the smallest screens,
+                     and between xl and 2xl where the nav links need the room. --}}
+                <span class="mx-1 hidden h-8 w-px bg-ink-200 md:block xl:hidden 2xl:block" aria-hidden="true"></span>
+                <img src="{{ asset('images/kuet-logo.jpg') }}"
+                     alt="Khulna University of Engineering & Technology"
+                     title="A student organisation of KUET"
+                     class="hidden size-9 rounded-lg object-contain md:block xl:hidden 2xl:block">
             </a>
 
             {{-- Desktop navigation --}}

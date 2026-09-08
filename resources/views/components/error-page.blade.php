@@ -61,7 +61,6 @@
             <ul class="mt-3 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm">
                 <li><a href="{{ route('campaigns.index') }}" class="text-white/70 transition hover:text-white">Campaigns</a></li>
                 <li><a href="{{ route('projects.index') }}" class="text-white/70 transition hover:text-white">Projects</a></li>
-                <li><a href="{{ route('news.index') }}" class="text-white/70 transition hover:text-white">News</a></li>
                 <li><a href="{{ route('about') }}" class="text-white/70 transition hover:text-white">About</a></li>
                 <li><a href="{{ route('search') }}" class="text-white/70 transition hover:text-white">Search</a></li>
             </ul>

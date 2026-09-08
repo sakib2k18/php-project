@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Campaign;
-use App\Models\Post;
 use App\Models\Project;
 use App\Models\SuccessStory;
 use Illuminate\Http\Request;
@@ -12,7 +11,7 @@ use Illuminate\View\View;
 class SearchController extends Controller
 {
     /**
-     * Site-wide search across the four content types visitors look for.
+     * Site-wide search across the content types visitors look for.
      * Every query uses Eloquent bindings — no string-concatenated SQL.
      */
     public function __invoke(Request $request): View
@@ -27,14 +26,12 @@ class SearchController extends Controller
             'campaigns' => collect(),
             'projects' => collect(),
             'stories' => collect(),
-            'posts' => collect(),
         ];
 
         if (filled($term)) {
             $results['campaigns'] = Campaign::query()->published()->search($term)->limit(6)->get();
             $results['projects'] = Project::query()->published()->search($term)->limit(6)->get();
             $results['stories'] = SuccessStory::query()->published()->search($term)->limit(6)->get();
-            $results['posts'] = Post::query()->published()->search($term)->limit(6)->get();
         }
 
         return view('pages.search', [

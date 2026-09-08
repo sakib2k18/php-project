@@ -9,7 +9,7 @@ use Illuminate\Database\Seeder;
 /**
  * `php artisan migrate:fresh --seed` produces a complete, populated website:
  * one administrator, fifteen supporters, nine campaigns with donation history,
- * projects, events, stories, articles, gallery, team and messages.
+ * projects, events, stories, gallery, team and messages.
  */
 class DatabaseSeeder extends Seeder
 {
@@ -23,7 +23,6 @@ class DatabaseSeeder extends Seeder
             ProjectSeeder::class,
             EventSeeder::class,
             SuccessStorySeeder::class,
-            PostSeeder::class,
             AnnouncementSeeder::class,
             TeamMemberSeeder::class,
             GallerySeeder::class,
