@@ -13,7 +13,9 @@
         </div>
 
         <div class="px-6 pb-6">
-            <div class="-mt-10 flex flex-wrap items-end gap-4">
+            {{-- `relative` is required: the banner above is also positioned, and a
+                 static avatar row would paint underneath it, clipping the avatar. --}}
+            <div class="relative -mt-10 flex flex-wrap items-end gap-4">
                 <x-ui.avatar :src="$user->avatar_url" :initials="$user->initials" :name="$user->name" size="xl" class="!ring-4 !ring-white" />
 
                 <div class="min-w-0 flex-1 pb-1">

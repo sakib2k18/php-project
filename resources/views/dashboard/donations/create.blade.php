@@ -87,7 +87,7 @@
                 {{-- Quick amounts: a convenience only; the field is still validated server-side. --}}
                 <div class="mt-4 flex flex-wrap items-center gap-2">
                     <span class="text-xs font-semibold text-ink-500">Common amounts:</span>
-                    @foreach ([500, 1000, 2850, 5000, 10000, 26000] as $preset)
+                    @foreach ([500, 1000, 2000, 5000, 10000, 50000] as $preset)
                         <button type="button"
                                 onclick="document.getElementById('amount').value={{ $preset }};document.getElementById('amount').dispatchEvent(new Event('input'))"
                                 class="btn btn-outline btn-sm">{{ money($preset) }}</button>
