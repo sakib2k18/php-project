@@ -16,16 +16,19 @@
     <form method="POST" action="{{ route('login') }}" data-validate class="mt-7 space-y-5">
         @csrf
 
+        {{-- `autocomplete="off"` / `new-password`: browsers ignore plain "off" on
+             login forms, but they will not pre-fill saved credentials into a
+             "new password" field — so the last user's login stays unset. --}}
         <x-form.field
             name="email" label="Email address" type="email" :required="true"
             placeholder="you@example.com" icon="mail"
-            rules="required|email" autocomplete="username" autofocus
+            rules="required|email" autocomplete="off" autofocus
         />
 
         <div>
             <x-form.password
                 name="password" label="Password"
-                rules="required" autocomplete="current-password"
+                rules="required" autocomplete="new-password"
             />
 
             <p class="mt-2 text-right">
