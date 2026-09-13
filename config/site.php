@@ -30,9 +30,9 @@ return [
     ],
 
     'social' => [
-        'facebook' => 'https://facebook.com/',
-        'instagram' => 'https://instagram.com/',
-        'youtube' => 'https://youtube.com/',
+        'facebook' => 'https://www.facebook.com/try.kuet',
+        'instagram' => 'https://www.instagram.com/try_kuet',
+        'youtube' => 'https://www.youtube.com/@TRYKUET',
         'linkedin' => null,
         'twitter' => null,
     ],

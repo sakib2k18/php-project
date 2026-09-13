@@ -59,11 +59,11 @@ class OrganizationSettingSeeder extends Seeder
 
             // ---- Social ---------------------------------------------------
             ['key' => 'facebook_url', 'label' => 'Facebook URL', 'group' => 'social', 'type' => 'url',
-                'value' => 'https://facebook.com/kuettry'],
+                'value' => 'https://www.facebook.com/try.kuet'],
             ['key' => 'instagram_url', 'label' => 'Instagram URL', 'group' => 'social', 'type' => 'url',
-                'value' => 'https://instagram.com/kuettry'],
+                'value' => 'https://www.instagram.com/try_kuet'],
             ['key' => 'youtube_url', 'label' => 'YouTube URL', 'group' => 'social', 'type' => 'url',
-                'value' => 'https://youtube.com/@kuettry'],
+                'value' => 'https://www.youtube.com/@TRYKUET'],
             ['key' => 'linkedin_url', 'label' => 'LinkedIn URL', 'group' => 'social', 'type' => 'url',
                 'value' => null],
 
