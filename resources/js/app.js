@@ -11,6 +11,7 @@ import './bootstrap';
 import initNavigation from './modules/navigation';
 import initToasts from './modules/toasts';
 import initFormValidation from './modules/form-validation';
+import initMultiselects from './modules/multiselect';
 import initPasswordToggles from './modules/password-toggle';
 import initConfirmations from './modules/confirm';
 import initImagePreviews from './modules/image-preview';
@@ -29,6 +30,7 @@ const boot = () => {
     initNavigation();
     initToasts();
     initFormValidation();
+    initMultiselects();
     initPasswordToggles();
     initConfirmations();
     initImagePreviews();

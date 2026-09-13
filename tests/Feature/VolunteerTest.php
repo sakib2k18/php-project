@@ -147,16 +147,22 @@ class VolunteerTest extends TestCase
         $this->assertSame('Fundraising, Teaching & tutoring, Event management', $volunteer->preferred_activity_label);
     }
 
-    public function test_the_application_form_offers_a_multi_select_for_activities(): void
+    public function test_the_activity_field_is_a_checkbox_dropdown_over_a_real_select(): void
     {
         $this->actingAs($this->user)
             ->get('/volunteer')
             ->assertOk()
+            // The native control posts the value, so the field still works
+            // without JavaScript.
             ->assertSee('name="preferred_activity[]"', false)
-            ->assertSee('size="6"', false);
+            ->assertSee('data-multiselect-native', false)
+            // …and the dropdown that takes over once JavaScript runs.
+            ->assertSee('data-multiselect-toggle', false)
+            ->assertSee('data-multiselect-panel', false)
+            ->assertSee('Choose activities…');
     }
 
-    public function test_the_edit_form_pre_selects_every_chosen_activity(): void
+    public function test_the_dropdown_pre_selects_every_chosen_activity(): void
     {
         Volunteer::factory()->create([
             'user_id' => $this->user->id,
@@ -166,10 +172,16 @@ class VolunteerTest extends TestCase
         $this->actingAs($this->user)
             ->get('/volunteer')
             ->assertOk()
+            // The option the form actually posts…
             ->assertSee('value="Fundraising" selected>', false)
             ->assertSee('value="Event management" selected>', false)
-            // ...and nothing else in the list is checked.
-            ->assertSee('value="Administration" >', false);
+            // …its checkbox…
+            ->assertSee('value="Fundraising" class="checkbox" checked>', false)
+            // …the closed button's summary, and the value `required` reads.
+            ->assertSee('Fundraising, Event management')
+            ->assertSee('value="Fundraising,Event management"', false)
+            // Nothing else is ticked.
+            ->assertSee('value="Administration" class="checkbox" >', false);
     }
 
     public function test_the_read_only_view_renders_a_volunteer_whose_optional_fields_are_empty(): void

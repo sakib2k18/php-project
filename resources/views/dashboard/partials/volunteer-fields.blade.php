@@ -55,13 +55,13 @@
         rules="required"
     />
 
-    <x-form.select
+    <x-form.multiselect
         name="preferred_activity" label="What would you like to do?" :required="true"
         :value="$volunteer->preferred_activity ?? null"
         :options="collect($activities)->mapWithKeys(fn ($a) => [$a => $a])->all()"
-        :multiple="true"
+        placeholder="Choose activities…"
         rules="required"
-        help="Pick as many as you like — hold Ctrl (or Cmd on a Mac) to select more than one."
+        help="Pick as many as you like."
     />
 </div>
 
