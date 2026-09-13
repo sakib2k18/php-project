@@ -89,7 +89,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="whitespace-nowrap text-ink-600">{{ $volunteer->preferred_activity }}</td>
+                                <td class="text-ink-600"><span class="line-clamp-1 block max-w-[16rem]">{{ $volunteer->preferred_activity_label ?: '—' }}</span></td>
                                 <td class="whitespace-nowrap text-ink-600">{{ $volunteer->availability_label }}</td>
                                 <td class="whitespace-nowrap text-xs text-ink-500">{{ $volunteer->created_at->format('j M Y') }}</td>
                                 <td><x-ui.status-badge :status="$volunteer->status" :label="$volunteer->status_label" /></td>
@@ -120,7 +120,7 @@
                             <x-ui.avatar :initials="Str::upper(Str::substr($volunteer->name, 0, 1))" size="sm" />
                             <div class="min-w-0 flex-1">
                                 <p class="truncate text-sm font-bold text-ink-900">{{ $volunteer->name }}</p>
-                                <p class="truncate text-xs text-ink-500">{{ $volunteer->preferred_activity }}</p>
+                                <p class="truncate text-xs text-ink-500">{{ $volunteer->preferred_activity_label ?: '—' }}</p>
                             </div>
                             <x-ui.status-badge :status="$volunteer->status" :label="$volunteer->status_label" />
                         </div>

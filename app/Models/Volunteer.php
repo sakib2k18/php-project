@@ -35,6 +35,7 @@ class Volunteer extends Model
     protected function casts(): array
     {
         return [
+            'preferred_activity' => 'array',
             'reviewed_at' => 'datetime',
         ];
     }
@@ -86,5 +87,11 @@ class Volunteer extends Model
     public function getAvailabilityLabelAttribute(): string
     {
         return config("site.volunteer_availability.{$this->availability}", ucfirst((string) $this->availability));
+    }
+
+    /** A volunteer may pick several activities; display them as one string. */
+    public function getPreferredActivityLabelAttribute(): string
+    {
+        return implode(', ', (array) $this->preferred_activity);
     }
 }

@@ -39,7 +39,7 @@ class VolunteerTest extends TestCase
             'address' => 'Hall Road, Khulna',
             'skills' => 'First aid, driving, photography',
             'availability' => 'weekends',
-            'preferred_activity' => 'Relief distribution',
+            'preferred_activity' => ['Relief distribution'],
             'motivation' => 'I went on one winter distribution run and I have not been able to stop thinking about it.',
         ], $overrides);
     }
@@ -82,8 +82,8 @@ class VolunteerTest extends TestCase
             ['email' => 'not-an-email', 'field' => 'email'],
             ['phone' => '', 'field' => 'phone'],
             ['availability' => 'whenever', 'field' => 'availability'],
-            ['motivation' => 'Too short.', 'field' => 'motivation'],
-            ['skills' => '', 'field' => 'skills'],
+            ['preferred_activity' => [], 'field' => 'preferred_activity'],
+            ['preferred_activity' => ['Not a real activity'], 'field' => 'preferred_activity.0'],
         ];
 
         foreach ($cases as $case) {
@@ -110,10 +110,97 @@ class VolunteerTest extends TestCase
         $volunteer = Volunteer::factory()->create(['user_id' => $this->user->id]);
 
         $this->actingAs($this->user)
-            ->put("/volunteer/{$volunteer->id}", $this->payload(['preferred_activity' => 'Fundraising']))
+            ->put("/volunteer/{$volunteer->id}", $this->payload(['preferred_activity' => ['Fundraising']]))
             ->assertRedirect();
 
-        $this->assertSame('Fundraising', $volunteer->fresh()->preferred_activity);
+        $this->assertSame(['Fundraising'], $volunteer->fresh()->preferred_activity);
+    }
+
+    public function test_skills_and_motivation_are_optional(): void
+    {
+        $this->actingAs($this->user)
+            ->post('/volunteer', $this->payload([
+                'skills' => null,
+                'motivation' => null,
+            ]))
+            ->assertRedirect()
+            ->assertSessionHasNoErrors();
+
+        $volunteer = Volunteer::query()->firstOrFail();
+
+        $this->assertNull($volunteer->skills);
+        $this->assertNull($volunteer->motivation);
+    }
+
+    public function test_a_supporter_may_pick_several_activities(): void
+    {
+        $activities = ['Fundraising', 'Teaching & tutoring', 'Event management'];
+
+        $this->actingAs($this->user)
+            ->post('/volunteer', $this->payload(['preferred_activity' => $activities]))
+            ->assertRedirect()
+            ->assertSessionHasNoErrors();
+
+        $volunteer = Volunteer::query()->firstOrFail();
+
+        $this->assertSame($activities, $volunteer->preferred_activity);
+        $this->assertSame('Fundraising, Teaching & tutoring, Event management', $volunteer->preferred_activity_label);
+    }
+
+    public function test_the_application_form_offers_a_multi_select_for_activities(): void
+    {
+        $this->actingAs($this->user)
+            ->get('/volunteer')
+            ->assertOk()
+            ->assertSee('name="preferred_activity[]"', false)
+            ->assertSee('size="6"', false);
+    }
+
+    public function test_the_edit_form_pre_selects_every_chosen_activity(): void
+    {
+        Volunteer::factory()->create([
+            'user_id' => $this->user->id,
+            'preferred_activity' => ['Fundraising', 'Event management'],
+        ]);
+
+        $this->actingAs($this->user)
+            ->get('/volunteer')
+            ->assertOk()
+            ->assertSee('value="Fundraising" selected>', false)
+            ->assertSee('value="Event management" selected>', false)
+            // ...and nothing else in the list is checked.
+            ->assertSee('value="Administration" >', false);
+    }
+
+    public function test_the_read_only_view_renders_a_volunteer_whose_optional_fields_are_empty(): void
+    {
+        Volunteer::factory()->create([
+            'user_id' => $this->user->id,
+            'skills' => null,
+            'motivation' => null,
+            'preferred_activity' => ['Fundraising'],
+        ]);
+
+        $this->actingAs($this->user)->get('/volunteer')->assertOk()->assertSee('Fundraising');
+    }
+
+    /** Every admin surface that prints an activity, against a multi-value row. */
+    public function test_the_admin_views_render_a_volunteer_with_several_activities(): void
+    {
+        $volunteer = Volunteer::factory()->create([
+            'preferred_activity' => ['Fundraising', 'Event management'],
+            'skills' => null,
+            'motivation' => null,
+        ]);
+
+        $this->actingAs($this->admin)
+            ->get("/admin/volunteers/{$volunteer->id}")
+            ->assertOk()
+            ->assertSee('Fundraising, Event management');
+
+        $this->actingAs($this->admin)->get('/admin/volunteers')->assertOk();
+        $this->actingAs($this->admin)->get('/admin')->assertOk();
+        $this->actingAs($this->admin)->get("/admin/users/{$volunteer->user_id}")->assertOk();
     }
 
     public function test_a_supporter_cannot_edit_an_application_once_it_is_reviewed(): void
@@ -121,7 +208,7 @@ class VolunteerTest extends TestCase
         $volunteer = Volunteer::factory()->approved()->create(['user_id' => $this->user->id]);
 
         $this->actingAs($this->user)
-            ->put("/volunteer/{$volunteer->id}", $this->payload(['preferred_activity' => 'Fundraising']))
+            ->put("/volunteer/{$volunteer->id}", $this->payload(['preferred_activity' => ['Fundraising']]))
             ->assertForbidden();
     }
 

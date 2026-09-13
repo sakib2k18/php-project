@@ -79,8 +79,8 @@
                             ['Institution', $volunteer->institution ?: '—'],
                             ['Address', $volunteer->address ?: '—'],
                             ['Availability', $volunteer->availability_label],
-                            ['Preferred activity', $volunteer->preferred_activity],
-                            ['Skills', $volunteer->skills],
+                            ['Preferred activity', $volunteer->preferred_activity_label ?: '—'],
+                            ['Skills', $volunteer->skills ?: '—'],
                         ];
                     @endphp
 
@@ -93,7 +93,7 @@
 
                     <div class="p-4">
                         <dt class="text-sm text-ink-500">Motivation</dt>
-                        <dd class="mt-2 rounded-xl bg-ink-50 p-3.5 text-sm leading-relaxed text-ink-700">{{ $volunteer->motivation }}</dd>
+                        <dd class="mt-2 rounded-xl bg-ink-50 p-3.5 text-sm leading-relaxed text-ink-700">{{ $volunteer->motivation ?: '—' }}</dd>
                     </div>
                 </dl>
             @endif

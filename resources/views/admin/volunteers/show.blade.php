@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <x-admin.page-header :title="$volunteer->name" :description="$volunteer->preferred_activity.' · '.$volunteer->availability_label">
+    <x-admin.page-header :title="$volunteer->name" :description="$volunteer->preferred_activity_label.' · '.$volunteer->availability_label">
         <a href="{{ route('admin.volunteers.index') }}" class="btn btn-outline">
             <x-ui.icon name="arrow-left" class="size-4" /> All applications
         </a>
@@ -31,7 +31,7 @@
                             ['Institution', $volunteer->institution ?: '—'],
                             ['Address', $volunteer->address ?: '—'],
                             ['Availability', $volunteer->availability_label],
-                            ['Preferred activity', $volunteer->preferred_activity],
+                            ['Preferred activity', $volunteer->preferred_activity_label ?: '—'],
                         ];
                     @endphp
 
@@ -46,12 +46,12 @@
 
             <div class="panel p-6">
                 <h3 class="panel-title mb-3">Skills offered</h3>
-                <p class="text-sm leading-relaxed text-ink-700">{{ $volunteer->skills }}</p>
+                <p class="text-sm leading-relaxed text-ink-700">{{ $volunteer->skills ?: '—' }}</p>
             </div>
 
             <div class="panel p-6">
                 <h3 class="panel-title mb-3">Why they want to volunteer</h3>
-                <p class="rounded-xl bg-ink-50 p-4 text-sm leading-relaxed text-ink-700">{{ $volunteer->motivation }}</p>
+                <p class="rounded-xl bg-ink-50 p-4 text-sm leading-relaxed text-ink-700">{{ $volunteer->motivation ?: '—' }}</p>
             </div>
 
             @if ($volunteer->reviewed_at)

@@ -39,7 +39,7 @@ class VolunteerSeeder extends Seeder
                     'address' => $member->address ?: 'Khulna, Bangladesh',
                     'skills' => $profile['skills'],
                     'availability' => $profile['availability'],
-                    'preferred_activity' => $profile['activity'],
+                    'preferred_activity' => [$profile['activity']],
                     'motivation' => $this->motivation($index),
                 ]
             );

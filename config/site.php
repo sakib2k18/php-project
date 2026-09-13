@@ -136,6 +136,22 @@ return [
     ],
 
     /*
+     * The activities an applicant may pick. Unlike `volunteer_availability`
+     * these are stored verbatim (a volunteer may pick several, kept as a JSON
+     * array), so the label and the value are the same string.
+     */
+    'volunteer_activities' => [
+        'Relief distribution',
+        'Fundraising',
+        'Teaching & tutoring',
+        'Medical camp support',
+        'Event management',
+        'Photography & media',
+        'Logistics & transport',
+        'Administration',
+    ],
+
+    /*
     |----------------------------------------------------------------------
     | Uploads
     |----------------------------------------------------------------------

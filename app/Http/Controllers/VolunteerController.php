@@ -19,7 +19,7 @@ class VolunteerController extends Controller
         return view('dashboard.volunteer', [
             'volunteer' => $volunteer,
             'availability' => config('site.volunteer_availability'),
-            'activities' => $this->activities(),
+            'activities' => config('site.volunteer_activities'),
             'approvedCount' => Volunteer::query()->approved()->count(),
         ]);
     }
@@ -43,22 +43,5 @@ class VolunteerController extends Controller
         $volunteer->update($request->validated());
 
         return redirect()->route('volunteer.index')->with('success', 'Your volunteer application has been updated.');
-    }
-
-    /**
-     * @return array<int, string>
-     */
-    protected function activities(): array
-    {
-        return [
-            'Relief distribution',
-            'Fundraising',
-            'Teaching & tutoring',
-            'Medical camp support',
-            'Event management',
-            'Photography & media',
-            'Logistics & transport',
-            'Administration',
-        ];
     }
 }

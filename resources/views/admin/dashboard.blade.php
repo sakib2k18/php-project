@@ -236,7 +236,7 @@
                             <div class="min-w-0 flex-1">
                                 <p class="truncate text-sm font-bold text-ink-900">{{ $volunteer->name }}</p>
                                 <p class="truncate text-xs text-ink-500">
-                                    {{ $volunteer->preferred_activity }}
+                                    {{ $volunteer->preferred_activity_label ?: '—' }}
                                     <span class="divider-dot">{{ $volunteer->availability_label }}</span>
                                 </p>
                             </div>

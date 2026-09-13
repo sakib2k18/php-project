@@ -24,18 +24,18 @@ class VolunteerFactory extends Factory
             'student_id' => fake()->numerify('19######'),
             'institution' => 'Khulna University of Engineering & Technology',
             'address' => fake()->streetAddress().', Khulna',
-            'skills' => fake()->randomElement([
+            'skills' => fake()->optional(0.8)->randomElement([
                 'Event management, photography, first aid',
                 'Teaching, curriculum design, mentoring',
                 'Logistics, driving, warehouse handling',
                 'Fundraising, social media, content writing',
             ]),
             'availability' => fake()->randomElement(array_keys(config('site.volunteer_availability'))),
-            'preferred_activity' => fake()->randomElement([
+            'preferred_activity' => fake()->randomElements([
                 'Relief distribution', 'Fundraising', 'Teaching & tutoring',
                 'Medical camp support', 'Event management',
-            ]),
-            'motivation' => fake()->paragraph(4),
+            ], fake()->numberBetween(1, 3)),
+            'motivation' => fake()->optional(0.8)->paragraph(4),
             'status' => Volunteer::STATUS_PENDING,
         ];
     }

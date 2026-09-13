@@ -59,22 +59,24 @@
         name="preferred_activity" label="What would you like to do?" :required="true"
         :value="$volunteer->preferred_activity ?? null"
         :options="collect($activities)->mapWithKeys(fn ($a) => [$a => $a])->all()"
-        placeholder="Choose an activity…"
+        :multiple="true"
         rules="required"
+        help="Pick as many as you like — hold Ctrl (or Cmd on a Mac) to select more than one."
     />
 </div>
 
 <x-form.textarea
-    name="skills" label="Skills you can bring" :required="true"
+    name="skills" label="Skills you can bring"
     :value="$volunteer->skills ?? null"
     placeholder="e.g. First aid, driving (light vehicle licence), photography, teaching mathematics, spreadsheet work…"
-    rules="required|min:5|max:500" :rows="3" :maxlength="500"
-    help="Be honest — “willing to carry things and learn” is a perfectly good answer."
+    rules="max:500" :rows="3" :maxlength="500"
+    help="Optional. Be honest — “willing to carry things and learn” is a perfectly good answer."
 />
 
 <x-form.textarea
-    name="motivation" label="Why do you want to volunteer?" :required="true"
+    name="motivation" label="Why do you want to volunteer?"
     :value="$volunteer->motivation ?? null"
     placeholder="A few sentences about what brought you here."
-    rules="required|min:30|max:1500" :rows="5" :maxlength="1500"
+    rules="max:1500" :rows="5" :maxlength="1500"
+    help="Optional — but it helps us place you well."
 />

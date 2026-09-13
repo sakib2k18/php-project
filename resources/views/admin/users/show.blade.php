@@ -119,10 +119,10 @@
 
                     <div class="p-5">
                         <p class="text-sm text-ink-700">
-                            <span class="font-semibold">{{ $volunteer->preferred_activity }}</span>
+                            <span class="font-semibold">{{ $volunteer->preferred_activity_label ?: '—' }}</span>
                             <span class="divider-dot">{{ $volunteer->availability_label }}</span>
                         </p>
-                        <p class="mt-2 line-clamp-2 text-xs leading-relaxed text-ink-500">{{ $volunteer->motivation }}</p>
+                        <p class="mt-2 line-clamp-2 text-xs leading-relaxed text-ink-500">{{ $volunteer->motivation ?: '—' }}</p>
 
                         <a href="{{ route('admin.volunteers.show', $volunteer) }}" class="btn btn-outline btn-sm mt-4">
                             <x-ui.icon name="hand-heart" class="size-4" /> Open application
